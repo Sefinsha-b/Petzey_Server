@@ -57,6 +57,21 @@ router.put('/Appointment/:id', async (req, res) => {
 
 
 
+router.delete('/Appointment/:id', async (req, res) => {
+    const appoIntmentId = req.params.id;
+
+    try {
+        const deletedappointment = await APPOINTMENT.findOneAndRemove({ _id: appoIntmentId });
+
+        if (deletedappointment) {
+            res.json({ message: 'Appointment deleted successfully' });
+        } else {
+            res.status(404).json({ message: 'Appointment not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting Appointment' });
+    }
+});
 
 
 module.exports = router;

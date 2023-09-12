@@ -56,6 +56,21 @@ router.put('/Department/:id', async (req, res) => {
         res.status(500).json({ message: 'Error updating Appointment' });
     }
 });
+router.delete('/Department/:id', async (req, res) => {
+    const DepartmentId = req.params.id;
+
+    try {
+        const deletedDepartment = await DEPARTMENT.findOneAndRemove({ _id: DepartmentId });
+
+        if (deletedDepartment) {
+            res.json({ message: 'Department deleted successfully' });
+        } else {
+            res.status(404).json({ message: 'Department not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting Department' });
+    }
+});
 
 
 

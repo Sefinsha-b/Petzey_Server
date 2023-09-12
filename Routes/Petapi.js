@@ -34,7 +34,7 @@ router.get('/Pet_in', async (req, res) => {
 
 // Get all Vets
 
-router.put('/Pet_in/:id', async (req, res) => {
+router.put('/Pet_in/:id', async (req, res) => {  
     const petId = req.params.id;
     const updatedData = req.body; // Assuming your request body contains the updated data
 
@@ -56,6 +56,22 @@ router.put('/Pet_in/:id', async (req, res) => {
 });
 
 
+// Delete a Pet by ID
+router.delete('/Pet_in/:id', async (req, res) => {
+    const petId = req.params.id;
+
+    try {
+        const deletedPet = await PETS.findOneAndRemove({ _id: petId });
+
+        if (deletedPet) {
+            res.json({ message: 'Pet deleted successfully' });
+        } else {
+            res.status(404).json({ message: 'Pet not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting pet' });
+    }
+});
 
 
 

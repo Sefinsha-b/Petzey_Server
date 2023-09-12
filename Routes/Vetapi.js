@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const router = express.Router();
 const VETS=require('../models/vetsMData')
 
@@ -49,5 +50,30 @@ router.put('/vet_in/:id', async (req, res) => {
         res.status(500).json({ message: 'Error updating Vetpage' });
     }
 });
+
+
+
+// Delete a Vet by ID
+router.delete('/vet_in/:id', async (req, res) => {
+    const vetId = req.params.id;
+
+    try {
+        const deletedVet = await VETS.findOneAndRemove({ _id: vetId });
+
+        if (deletedVet) {
+            res.json({ message: 'Vetpage deleted successfully' });
+        } else {
+            res.status(404).json({ message: 'Vetpage not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting Vetpage' });
+    }
+});
+
+// Delete a Vet by ID
+// Delete a Vet by ID
+
+
+
 
 module.exports = router;

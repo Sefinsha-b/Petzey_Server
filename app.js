@@ -12,7 +12,7 @@ const Appointmentroutes = require('./Routes/appointmentapi');
 const Departmentroutes = require('./Routes/Departmentapi');
 const Dummyroutes = require('./Routes/dummapi.js');
 
-const allowedOrigins = ['https://petheaven-b9567.netlify.app/dashboard'];
+const allowedOrigins = ['https://petheaven-b9567.netlify.app'];
 
 app.use(
   cors({
